@@ -1,4 +1,4 @@
-import { View, Text, TextInput, SafeAreaView, ScrollView } from 'react-native'
+import { View, Text, TextInput, SafeAreaView, ScrollView, Button, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from '@react-navigation/native';
@@ -19,6 +19,8 @@ const DestinationSearch = (props) => {
   const [originPlace, setOriginPlace] = useState(null);
   const [destinationPlace, setDestinationPlace] = useState(null);
 
+
+
   const navigation = useNavigation();
 
   const checkNavigation = () => {
@@ -30,8 +32,26 @@ const DestinationSearch = (props) => {
     }
   }
 
+  const handleOriginSelect = (data, details) => {
+    const { location } = details.geometry;
+    const { lat, lng } = location;
+    setOriginPlace({ latitude: lat, longitude: lng });
+    console.log('originPlace:', originPlace);
+
+  };
+
+  const handleDestinationSelect = (data, details) => {
+    const { location } = details.geometry;
+    const { lat, lng } = location;
+    setDestinationPlace({ latitude: lat, longitude: lng });
+    console.log('destinationPlace:', destinationPlace);
+
+  };
+
   useEffect(() => {
-    checkNavigation();
+    // checkNavigation();
+    // console.log('OriginPlace:', originPlace);
+    // console.log('DestinationPlace:', destinationPlace);
   }, [originPlace, destinationPlace]);
 
   return (
@@ -39,10 +59,11 @@ const DestinationSearch = (props) => {
       <View style={styles.searchContainer}>
 
         <GooglePlacesAutocomplete
-          placeholder='From1'
-         onPress={(data, details = null) => {
-            setOriginPlace({data, details});
-          }}
+          placeholder='From'
+     
+        onPress={handleOriginSelect}
+          nearbyPlacesAPI='GooglePlacesSearch'
+        debounce={300}
           currentLocation={true}
           currentLocationLabel='Current location'
           fetchDetails={true}
@@ -75,9 +96,14 @@ const DestinationSearch = (props) => {
 
         <GooglePlacesAutocomplete
           placeholder='Where to?'
-          onPress={(data, details = null) => {
-            setDestinationPlace({data, details});
-          }}
+          // onPress={(data, details) => {
+          //   setDestinationPlace({data,details});
+          //   // console.log('DestinationPlace Data:', data);
+          //   console.log("----------------------------------")
+          //   console.log('DestinationPlace details:', details);
+
+          // }}
+          onPress={handleDestinationSelect}
           enablePoweredByContainer={false}
           fetchDetails={true}
           query={{
@@ -133,7 +159,13 @@ const DestinationSearch = (props) => {
           position: 'absolute',
           top: 82,
         }} />
+
+
       </View>
+      <Button title='GO' onPress={checkNavigation} style={{ }}/>
+      <TouchableOpacity style={{backgroundColor:'blue'}}>
+        <Text>Go</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   )
 }
