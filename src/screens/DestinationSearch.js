@@ -4,6 +4,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { useNavigation } from '@react-navigation/native';
 import styles from '../components/Style'
 import PlaceRow from '../components/PlaceRow';
+import Geolocation from '@react-native-community/geolocation';
 
 
 const homePlace = {
@@ -54,6 +55,15 @@ const DestinationSearch = (props) => {
     // console.log('DestinationPlace:', destinationPlace);
   }, [originPlace, destinationPlace]);
 
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      (info) => {},
+      (error) => {},
+      { timeout: 20000 }
+  );
+  }, [])
+  
+
   return (
     <SafeAreaView>
       <View style={styles.searchContainer}>
@@ -63,7 +73,7 @@ const DestinationSearch = (props) => {
      
         onPress={handleOriginSelect}
           nearbyPlacesAPI='GooglePlacesSearch'
-        debounce={300}
+        // debounce={300}
           currentLocation={true}
           currentLocationLabel='Current location'
           fetchDetails={true}
@@ -163,9 +173,7 @@ const DestinationSearch = (props) => {
 
       </View>
       <Button title='GO' onPress={checkNavigation} style={{ }}/>
-      <TouchableOpacity style={{backgroundColor:'blue'}}>
-        <Text>Go</Text>
-      </TouchableOpacity>
+     
     </SafeAreaView>
   )
 }

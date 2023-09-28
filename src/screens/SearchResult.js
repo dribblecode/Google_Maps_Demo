@@ -34,11 +34,11 @@ const SearchResult = (props) => {
  origin={originPlace} destination={destinationPlace} 
  /> */}
  <MapView style={{height:'100%', width:'100%'}}
-showsUserLocation={true}
+// showsUserLocation={true}
         provider={PROVIDER_GOOGLE}
      initialRegion={{
-      latitude: 50.843045,
-    longitude: 4.425673,
+      latitude: originLoc.latitude,
+    longitude: originLoc.longitude,
       latitudeDelta: 0.0222,
       longitudeDelta: 0.0121,
     }}
@@ -48,8 +48,8 @@ showsUserLocation={true}
     origin={originLoc}
     destination={destinationLoc}
     apikey={GOOGLE_MAPS_APIKEY}
-    strokeWidth={3}
-    strokeColor="red"
+    strokeWidth={4}
+    strokeColor="black"
   />
      <Marker
       coordinate={originLoc}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342465367365",
+    "project_id": "capable-bliss-394814",
+    "storage_bucket": "capable-bliss-394814.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342465367365:android:251678e0135fa15b0f022c",
+        "android_client_info": {
+          "package_name": "com.google_maps_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzrXtrIaAsKOaxhxEudco6I8YqPye5y-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
